@@ -1,13 +1,4 @@
 
--- This must already be done by admin ---
-/*
-  psql postgres postgres
-  CREATE USER benchuser WITH LOGIN CREATEDB ENCRYPTED PASSWORD 'b3ncH@U53R';
-  CREATE DATABASE benchdb WITH OWNER = benchuser TEMPLATE = template1 ENCODING 'UTF-8' CONNECTION LIMIT = 20;
-  \c benchdb
-  CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-*/
-
 CREATE SCHEMA IF NOT EXISTS pgfailover AUTHORIZATION benchuser;
 CREATE TABLE IF NOT EXISTS pgfailover.benchtab ( ts TIMESTAMP NOT NULL, id UUID PRIMARY KEY NOT NULL, status TEXT );
 CREATE OR REPLACE VIEW pgfailover.benchview AS

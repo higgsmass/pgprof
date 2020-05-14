@@ -12,7 +12,7 @@ from datetime import datetime
 MAX_DBCON_POOL = 4
 MAX_WORDS_PER_ITER = 30
 
-log = logging.getLogger('adv')
+log = logging.getLogger('pgprof')
 
 dbops = {'INSERT':'0', 'READ':'1', 'UPDATE':'2', 'DELETE':'3'}
 opsdb = dict((v,k) for k,v in dbops.items())
@@ -254,50 +254,4 @@ def run(options):
             log.info('{} reads, {} writes in {:.0f} {}. waiting 1s before next iteration...'.format(num_reads,num_writes,el, unit))
             time.sleep(1)
 
-## -------------------------------------------------------------------------- ##
-def benchopts():
-    """
-    Read and parse command line arguments
-    """
-    import argparse
-
-    opt = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter)
-    opt.add_argument("-l", "--log", dest="loglevel", choices=['DEBUG','INFO','WARNING','ERROR','CRITICAL'], default='INFO',
-            help="set log level [ default = %(default)s ]")
-    opt.add_argument ("-p", "--prompt", dest="prompt", default=False,
-            help="prompt before execution [ default = %(default)s ]", action='store_true')
-    opt.add_argument ("-q", "--quiet", dest="quiet", default=False,
-            help="execute in quiet mode [ default = %(default)s ]", action='store_true')
-
-    sub = opt.add_subparsers(title='Commands', dest='command', help='sub-command help')
-
-    ## initdb subcommand
-    init = sub.add_parser('initdb')
-    init.add_argument ("-s", "--schema", type=str, default='./schema.sql', dest="schema",
-            help="path to database schema [ example = /path/to/my_app_schema.sql, default = %(default)s ]" , action='store')
-
-    ## rwops subcommand
-    rwops = sub.add_parser('rwops')
-    rwops.add_argument ("-rwr", "--rwratio", type=str, default='2:1', dest="rwratio",
-            help="read to write ratio [ example 5:3, default = %(default)s ]", action='store')
-    rwops.add_argument ("-inf", "--infinity", dest="forever",
-            help="keep running until ctrl + c is pressed [ default = %(default)s ]", action='store_true')
-    rwops.add_argument ("-opi", "--opsperiter", type=int, default=10, dest="opsperiter",
-            help="operations per iteration [ example = 27, default = %(default)s, max-allowed = 30 ]", action='store')
-    rwops.add_argument ("-d", "--delay", type=int, default=0, dest="delay", choices=range(0,11),
-            help="delay (in seconds) between each operation [ example = 1, default = %(default)s, max-allowed = 10 ]", action='store')
-
-    options = opt.parse_args(sys.argv[1:])
-    if vars(options)['command'] == None:
-        opt.print_help(sys.stderr)
-        sys.exit(1)
-
-    if options.quiet:
-        options.loglevel = 'WARNING'
-
-    ## set loglevel and format
-    log_format = "%(asctime)s %(message)s"
-    logging.basicConfig(level=options.loglevel, format=log_format)
-
-    return options
 
