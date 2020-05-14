@@ -43,7 +43,8 @@ Here the assumption is the `pgprof` application is intended to be installed eith
 
 If all goes well the binaries are installed in `bin/{benchpg,pgprof-start}` and library in `lib/python3.?/site-packages/pgprof*` and you can proceed to testing.
 
-##Testing 
+
+## Testing 
 Try the entry-point script first, you should see the import succeed. Then try `benchpg` and subcommands. 
 
 ```
