@@ -96,9 +96,10 @@ postgres@primary:~$
 ```
 
 #### Optional Security Step
+##### SCRAM Authentication 
 For my own usage and testing, I have upgraded/enabled the password based authentication to use SCRAM by referring [this blogpost](https://info.crunchydata.com/blog/how-to-upgrade-postgresql-passwords-to-scram) from Crunchy Data. If you do, make sure you test out the connection and add the `pg_hba.conf` entry on the postgres server in order for the application to access it using this method. It is considered a safer approach.
 
-##### SCRAM Authentication
+
  
 #### Invoking *`pgprof`* Application
 To connect the application to database, you need to set an environment variable **PGDSN** on the `test` VM. The example used here has a `host=primary` and `password=your-secret`. You may want to change these appropriately based on your host IP / FQDN and the password you chose.
