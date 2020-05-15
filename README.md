@@ -62,7 +62,7 @@ This requires elevated access (`user = postgres`) to postgres database. Login to
 
 Connect to `host=postgres` server as `user=postgres` to `database=postgres` and replace *'your-secret'* in the instructions below with a safe password of your choice. And the host and password will be used by `pgprof` to connect to the database. 
  
-```
+```sql
 postgres@primary:~$ psql -U postgres -d postgres
 postgres=# DROP DATABASE IF EXISTS benchdb;
 DROP DATABASE
@@ -82,7 +82,7 @@ postgres@primary:~$
 ```
 Alternatively, one can include all of the above commands into a single (for example `app.init.sql`) script and invoke it as follows
 
-```
+```sql
 
 postgres@primary:~$ psql -U postgres -d postgres -f app.init.sql
 DROP DATABASE
@@ -104,13 +104,13 @@ For my own usage and testing, I have upgraded/enabled the password based authent
 #### Invoking *`pgprof`* Application
 To connect the application to database, you need to set an environment variable **PGDSN** on the `test` VM. The example used here has a `host=primary` and `password=your-secret`. You may want to change these appropriately based on your host IP / FQDN and the password you chose.
 
-```
+```sh
 [ pgpy ] test:~/pgprof$ export PGDSN="dbname='benchdb' user='benchuser' host='primary' password='your-secret'"
 ```
 
 Now we are ready to test / run the application.
 
-```
+```sh
 [ pgpy ] test:~/pgprof$ benchpg --help
 usage: benchpg [-h] [-l {DEBUG,INFO,WARNING,ERROR,CRITICAL}] [-p] [-q]
                {initdb,rwops} ...
@@ -132,7 +132,7 @@ There are two subcommands. The first is `initdb` which bootstraps the schema, ta
 
 #### Bootstrapping `pgprof` Schema
 
-```
+```sh
 [ pgpy ] test:~/pgprof$ benchpg initdb --help
 usage: benchpg initdb [-h] [-s SCHEMA]
 
@@ -164,7 +164,7 @@ The table has three columns: timestamp`=ts`, id`=id` (also a uuid-based primary 
 NOTE: Every INSERT statement results in an automatic generation of a unique primary key and a timestamp based on the trigger and stored functions called.
 
 
-```
+```sql
 benchdb=# set search_path to pgfailover,public;
 SET
 benchdb=# \df
