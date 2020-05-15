@@ -7,7 +7,7 @@ There are many benchmarking / profiling tools for measuring postgres database cl
 
 ## TL; DR
 <tldr>
-![pgprof/tldr.gif](pgprof/tldr.gif)
+![./pgprof/tldr.gif](./pgprof/tldr.gif)
 </tldr>
 <cmds>
 
