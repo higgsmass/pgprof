@@ -6,9 +6,7 @@ There are many benchmarking / profiling tools for measuring postgres database cl
 3. Some ***data analysis capability built-in*** for extracting cluster performance as viewed from an application's perspective.
 
 ## TL; DR
-<tldr>
 ![](tldr.gif)
-</tldr>
 <cmds>
 
 ```sh
