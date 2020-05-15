@@ -20,6 +20,8 @@ pgprof-start
 ```
 </cmds>
 
+After this step proceed to ![Testing](https://github.com/higgsmass/pgprof#testing)
+
 ## Installation
 It requires the following: 
 
