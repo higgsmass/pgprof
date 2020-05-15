@@ -6,7 +6,21 @@ There are many benchmarking / profiling tools for measuring postgres database cl
 3. Some ***data analysis capability built-in*** for extracting cluster performance as viewed from an application's perspective.
 
 ## TL; DR
+<tldr>
+![pgprof/tldr.gif](pgprof/tldr.gif)
+</tldr>
+<cmds>
 
+```sh
+sudo apt-get install virtualenv
+virtualenv --python=python3 --prompt="[ pgpy ] " ${PWD}
+git clone https://github.com/higgsmass/pgprof.git
+source bin/activate && cd pgprof
+pip install -r requirements.txt
+python setup.py build && python setup.py install
+pgprof-start
+```
+</cmds>
 
 ## Installation
 It requires the following: 
